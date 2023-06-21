@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ entity.capitalize() }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            color: #666;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+        th {
+            background-color: #eee;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .btn-action {
+            padding: 5px 10px;
+            background-color: #337ab7;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .btn-action:not(:last-child) {
+            margin-right: 5px;
+        }
+        .btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ entity.capitalize() }}</h1>
+    <h2>Table</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table_data %}
+            <tr>
+                <td>{{ row['id'] }}</td>
+                <td>{{ row['name'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="btn-container">
+        <button class="btn-action" onclick="insertRow()">Insert</button>
+        <button class="btn-action" onclick="updateRow()">Update</button>
+        <button class="btn-action" onclick="deleteRow()">Delete</button>
+    </div>
+    
+    <script>
+        function insertRow() {
+            console.log('Insert row');
+            // Logic for inserting a row for the entity
+        }
+        
+        function updateRow() {
+            console.log('Update row');
+            // Logic for updating the row for the entity
+        }
+        
+        function deleteRow() {
+            console.log('Delete row');
+            // Logic for deleting the row for the entity
+        }
+    </script>
+</body>
+</html>
