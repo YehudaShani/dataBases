@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+</head>
+<body>
+    <h1>Menu</h1>
+    <ul>
+        {% for entity in entities %}
+        <li><a href="{{ url_for('entity', entity=entity['name']) }}">{{ entity['display_name'] }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
