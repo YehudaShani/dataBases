@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 20px;
+            background-image: url('../static/bakery.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Welcome to the Advertising sector of our bakery!</h1>
+    <div class="center">
+        <h2>Choose a table to view</h2>
+    </div>
+
+    <div class="button-container">
+        <button onclick="redirectToTable('presenter')">Presenters</button>
+        <button onclick="redirectToTable('product')">Products</button>
+        <button onclick="redirectToTable('campaign')">Campaigns</button>
+
+    </div>
+    </div>
+
+
+
+    <div class="container">
+    <div class="center">
+        <h2>Enter your SQL Query</h2>
+        <form id="sql-form" action="/query" method="get">
+                <input placeholder="Upload Id" type="text" id="query" name="query">
+            <div>
+                <button type="submit">Check Status</button>
+            </div>
+        </form>
+    </div>
+    </div>
+
+    <div class="container">
+    <div class="center">
+        <h2>Wanna run a prepared query?</h2>
+    </div>
+
+            <div class="button-container">
+        <button onclick="redirectToQuery('kind')">How many products by KIND?</button>
+        <button onclick="redirectToQuery('excellent')">What are out EXCELLENT products?</button>
+        <button onclick="redirectToQuery('campaigns')">What are our BEST campaigns</button>
+
+    </div>
+    </div>
+    <script>
+        function redirectToTable(buttonName) {
+            // Construct the URL with the button name as a GET property
+            var url = "/table?button=" + encodeURIComponent(buttonName);
+
+            // Redirect to the table page
+            window.location.href = url;
+        }
+        function redirectToQuery(buttonName) {
+            // Construct the URL with the button name as a GET property
+            var url = "/prepared?query=" + encodeURIComponent(buttonName);
+
+            // Redirect to the table page
+            window.location.href = url;
+        }
+
+    </script>
+
+</body>
+</html>

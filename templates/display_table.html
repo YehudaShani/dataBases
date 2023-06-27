@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Showing the table for {{table_name}}</h1>
+    <div class="table-container">
+        <table id="table-data"></table>
+    </div>
+
+    <script type="module">
+
+        import data from '../static/data.json' assert { type: 'json' };
+        console.log(data);
+
+
+
+        // JSON data representing the table
+        var jsonData = data;
+
+        // Function to generate the table from JSON data
+        function generateTable(data) {
+            var table = document.getElementById('table-data');
+
+            // Create table header
+            var headerRow = table.insertRow();
+            for (var key in data[0]) {
+                if (data[0].hasOwnProperty(key)) {
+                    var headerCell = document.createElement('th');
+                    headerCell.textContent = key;
+                    headerRow.appendChild(headerCell);
+                }
+            }
+
+            // Create table rows
+            for (var i = 0; i < data.length; i++) {
+                var row = table.insertRow();
+                for (var key in data[i]) {
+                    if (data[i].hasOwnProperty(key)) {
+                        var cell = row.insertCell();
+                        cell.textContent = data[i][key];
+                    }
+                }
+            }
+        }
+
+        // Call the function to generate the table
+        generateTable(jsonData);
+    </script>
+</body>
+</html>

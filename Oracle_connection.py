@@ -39,11 +39,49 @@ def get_products():
 def apply_query(query):
     cursor.execute(query)
     result = cursor.fetchall()
-    return result
+    columns = [i[0] for i in cursor.description]
+    return columns, result
 
 
-import json
-from datetime import datetime
+def get_amount_by_kind():
+    query = """select productKind, count(*)
+       from campaign natural join product natural join promotes
+       group by productKind
+        order by count(*) DESC
+            """
+    cursor.execute(query)
+    result = cursor.fetchall()
+    print(result)
+    columns = [i[0] for i in cursor.description]
+    return columns, result
+
+
+def get_excelent_products():
+    query = """SELECT productnumber, productname, productkind, count(*)
+        From campaign natural join product natural join promotes
+        where successrates > 9
+        group by productnumber, productname, productkind
+            """
+    cursor.execute(query)
+    result = cursor.fetchall()
+    print(result)
+    columns = [i[0] for i in cursor.description]
+    columns[3] = "amount of excellent campaigns"
+    return columns, result
+
+
+def best_campaigns():
+    query = """select productkinD, avg(rating)
+from tv_campaign natural join campaign natural join promotes natural join product
+group by productkind
+order by avg(rating - successrates) DESC
+                """
+    cursor.execute(query)
+    result = cursor.fetchall()
+    print(result)
+    columns = [i[0] for i in cursor.description]
+    return columns, result
+
 
 def convert_to_json(column_names, result):
     # Create an empty list to store the row data
@@ -65,8 +103,8 @@ def convert_to_json(column_names, result):
     # Serialize the JSON list
     json_result = json.dumps(json_data)
 
+    # save json to file
+    with open('static/data.json', 'w') as outfile:
+        json.dump(json_data, outfile)
+
     return json_result
-
-
-print(convert_to_json(*get_campaigns()))
-
